@@ -13,7 +13,7 @@ class TimerService : Service() {
         private val TAG = "TimerService"
 
         override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-            val countdownTime = intent?.getIntExtra("countdownTime", 0) ?: 0
+            val countdownTime = intent?.getIntExtra("timeForService", 0) ?: 0
             if (countdownTime > 0) {
                 startCountdown(countdownTime)
             }
@@ -21,12 +21,13 @@ class TimerService : Service() {
         }
 
         private fun startCountdown(time: Int) {
+            Log.d(TAG, "Starting countdown for $time seconds.")
             CoroutineScope(Dispatchers.IO).launch {
                 var countdown = time
                 while (countdown > 0) {
                     Log.d(TAG, "$countdown seconds remaining")
                     delay(1000)  // 1 second delay
-                    countdown--
+                    countdown-- // decrement countdown
                 }
                 Log.d(TAG, "Countdown completed!")
             }

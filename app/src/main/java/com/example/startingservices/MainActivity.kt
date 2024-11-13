@@ -3,6 +3,7 @@ package com.example.startingservices
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -20,8 +21,10 @@ class MainActivity : AppCompatActivity() {
         button = findViewById(R.id.btnStartCountdown)
 
         button.setOnClickListener{
+
             val timeForService = editText.text.toString().toIntOrNull()
-            val intent = Intent(this, CountDownTimer::class.java)
+            Log.d("MainActivity", "Button clicked with time: $timeForService")
+            val intent = Intent(this, TimerService::class.java)
 
             intent.putExtra("timeForService",timeForService)
             startService(intent)
