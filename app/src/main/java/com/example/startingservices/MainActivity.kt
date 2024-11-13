@@ -25,9 +25,7 @@ class MainActivity : AppCompatActivity() {
 
             intent.putExtra("timeForService",timeForService)
             startService(intent)
-
         }
-
 
     }
 }
